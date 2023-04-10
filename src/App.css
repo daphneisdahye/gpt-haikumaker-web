@@ -1,38 +1,47 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+html, body, #root, #root > div {
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#header {
+  height: 64px;
+  /* border-bottom: 1px solid gray; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#header-area {
+  width: 1024px;
+  height: 100%; /*부모의 높이를 그대로 받기 위해*/
+  margin: 0 auto; 
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: center; /* 수직 가운데 정렬 */    
+}
+
+#header-area span {
+  font-size: 36px; /* 텍스트 크기를 36px로 설정 */
+  font-weight: bold; /* 텍스트 두께를 bold로 설정 */
+
+}
+
+#body {
+  min-height: 100vh;
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+
+#footer {
+  height: 200px;
+
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

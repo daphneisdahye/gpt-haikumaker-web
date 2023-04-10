@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import MainPageComponent from "./main";
+import { Switch, Route } from "react-router-dom";
+import { HeartOutlined } from "@ant-design/icons";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div>
+      <div id="header">
+        <div id="header-area">
+          <HeartOutlined style={{ marginRight: "8px" }} />
+          <span>Haiku Maker</span>
+        </div>
+      </div>
+      <div id="body">
+        <Switch>
+          <Route path={"/"}>
+            <MainPageComponent />
+          </Route>
+        </Switch>
+      </div>
+      <div id="footer">
+        <p>Copyright © 2023 Dahye</p>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <a href="#">About</a> -<a href="#">Privacy Policy</a> -
+          <a href="#">Contact Us</a>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
     </div>
   );
 }

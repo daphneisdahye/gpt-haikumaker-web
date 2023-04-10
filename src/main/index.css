@@ -1,0 +1,85 @@
+.main-text {
+    font-size: 26px;
+    /* 원하는 글꼴 크기로 변경 */
+    font-weight: bold;
+    /* 글꼴 두께를 더 진하게 설정 */
+}
+
+.sub-text {
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(150, 150, 150);
+
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000;
+    /* 테두리를 진하게 설정 */
+}
+
+
+#haiku-info {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* 요소들을 수직으로 정렬 */
+    align-items: center;
+    /* 요소들을 왼쪽에 정렬 */
+    gap: 30px;
+    /* span과 button 사이의 간격 */
+}
+
+
+#haikus-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
+.gradient-cover {
+    height: 200px;
+    background-image: linear-gradient(to right, var(--color1), var(--color2));
+    border-radius: 8px 8px 0 0;
+    /* 상단 좌/우 둥근 모서리 처리 */
+}
+
+.form-container {
+    display: flex;
+    gap: 16px;
+}
+
+
+.form-item {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.haiku-name {
+    width: 120px;
+}
+
+.haiku-words {
+    width: 220px;
+}
+
+#haiku-button {
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.haiku-content {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px 25px;
+    line-height: 2.3;
+  }
