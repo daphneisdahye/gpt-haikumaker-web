@@ -193,8 +193,8 @@ function MainPage() {
                 <span style={{
       position: "absolute",
       bottom: 0,
-      left: "40%",
-      transform: "translateX(80%)",
+      right: "0",
+      transform: "translateX(0%)",
       opacity: 0.3,
       margin: "20px",
     }}>
