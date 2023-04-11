@@ -89,3 +89,8 @@ button {
     justify-content: center;
     margin-top: 50px;
   }
+
+  .ant-card-hoverable:hover {
+    transform: scale(1.03);
+    transition: all 0.2s ease-in-out;
+  }

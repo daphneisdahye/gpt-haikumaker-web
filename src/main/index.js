@@ -1,10 +1,16 @@
 import "./index.css";
+import { API_URL } from "../config/constants.js";
 import React, { useEffect } from "react";
 import { Card, Button, Form, Input, message, Pagination } from "antd";
-
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import axios from "axios";
 import { SmileOutlined } from "@ant-design/icons";
+
+
 const { Meta } = Card;
+
+dayjs.extend(relativeTime);
 
 function MainPage() {
   const [haikus, setHaikus] = React.useState([]);
@@ -22,7 +28,7 @@ function MainPage() {
       };
 
       axios
-        .get("http://localhost:8080/haikus",{params})
+        .get(`${API_URL}/haikus`,{params})
         .then(function (result) {
           const haikus = result.data.haikus;
           const totalPages = result.data.totalPages;
@@ -79,7 +85,7 @@ function MainPage() {
     const color2 = colors[randomIndex2];
 
     axios
-      .post(`http://localhost:8080/haikus`, {
+      .post(`${API_URL}/haikus`, {
         author: values.author,
         words: values.words,
         color1: color1,
@@ -88,7 +94,7 @@ function MainPage() {
       .then((result) => {
         console.log("정상적으로 정보가 전송되었습니다:", result.data);
         axios
-          .get("http://localhost:8080/haikus")
+          .get(`${API_URL}/haikus`)
           .then((result) => {
             const haikus = result.data.haikus;
             setHaikus(haikus);
@@ -183,7 +189,17 @@ function MainPage() {
                   </div>
                 }
               >
-                <Meta title={haiku.words} description={haiku.author} />
+                <Meta title={haiku.author} description={haiku.words} />
+                <span style={{
+      position: "absolute",
+      bottom: 0,
+      left: "40%",
+      transform: "translateX(80%)",
+      opacity: 0.3,
+      margin: "20px",
+    }}>
+  {dayjs(haiku.createdAt).fromNow()}
+</span>
               </Card>
             );
           })
