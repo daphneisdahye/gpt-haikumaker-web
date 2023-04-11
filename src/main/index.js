@@ -1,6 +1,6 @@
 import "./index.css";
 import React, { useEffect } from "react";
-import { Card, Button, Form, Input, message } from "antd";
+import { Card, Button, Form, Input, message, Pagination } from "antd";
 
 import axios from "axios";
 import { SmileOutlined } from "@ant-design/icons";
@@ -9,40 +9,60 @@ const { Meta } = Card;
 function MainPage() {
   const [haikus, setHaikus] = React.useState([]);
   const [form] = Form.useForm();
+  const [totalPages, setTotalPages] = React.useState(1);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [pageSize, setPageSize] = React.useState(9); 
 
-  useEffect(function () {
-    axios
-      .get("http://localhost:8080/haikus")
-      .then(function (result) {
-        const haikus = result.data.haikus;
-        setHaikus(haikus);
-        console.log("haikus:", haikus);
-      })
-      .catch(function (err) {
-        console.error("error:", err);
-      });
-  }, []);
+
+  useEffect(
+    function () {
+      let params = {
+        page: currentPage,
+        limit: 9,
+      };
+
+      axios
+        .get("http://localhost:8080/haikus",{params})
+        .then(function (result) {
+          const haikus = result.data.haikus;
+          const totalPages = result.data.totalPages;
+          setHaikus(haikus);
+          setTotalPages(totalPages);
+          console.log("haikus:", haikus);
+        })
+        .catch(function (err) {
+          console.error("error:", err);
+        });
+    },
+    [currentPage]
+  );
 
   const colors = [
-    "#ef5777",
-    "#575fcf",
-    "#4bcffa",
-    "#34e7e4",
-    "#0be881",
-    "#f53b57",
-    "#3c40c6",
-    "#0fbcf9",
-    "#00d8d6",
-    "#05c46b",
-    "#ffc048",
-    "#ffdd59",
-    "#ff5e57",
-    "#d2dae2",
-    "#485460",
-    "#ffa801",
-    "#ffd32a",
-    "#ff3f34",
+    "#FFC5B5",
+    "#FFD5C5",
+    "#FFE5D5",
+    "#F5ECCE",
+    "#DAE9CA",
+    "#BCE2C1",
+    "#ACE1D1",
+    "#C1DCE8",
+    "#D0D9E8",
+    "#E0DCE8",
+    "#EAD1DC",
+    "#FFC2E2",
+    "#F7ACCF",
+    "#FFBE7D",
+    "#F2E3DE",
+    "#B4DEE4",
+    "#FFA1A1",
+    "#E8A87C",
+    "#C38D9E",
   ];
+
+  const onPageChange = (page) => {
+    // ページ番号をアップデート
+    setCurrentPage(page);
+  };
 
   const onSubmit = (values) => {
     // 단어 구분자로 단어 분리하기
@@ -92,10 +112,8 @@ function MainPage() {
           chatGPTと俳句を作成してみよう
           <SmileOutlined style={{ fontSize: "24px", marginLeft: "8px" }} />
         </span>
-        <span className="sub-text">
-           1~3つの単語を入力してください          
-        </span>
-        
+        <span className="sub-text">1~3つの単語を入力してください</span>
+
         <Form form={form} name="俳句入力" onFinish={onSubmit}>
           <div className="form-container">
             <Form.Item
@@ -117,9 +135,8 @@ function MainPage() {
               <Input
                 className="haiku-words"
                 size="middle"
-                placeholder="例) パンダ、竹、愛 " 
+                placeholder="例) パンダ、竹、愛 "
               />
-              
             </Form.Item>
           </div>
           <Form.Item>
@@ -140,22 +157,28 @@ function MainPage() {
           haikus.map(function (haiku, index) {
             return (
               <Card
-                key={index} 
+                key={index}
                 hoverable
-                style={{ width: 240 }}
+                style={{ width: 300 }}
                 cover={
                   <div
                     className="gradient-cover"
                     style={{
                       "--color1": haiku.color1,
                       "--color2": haiku.color2,
+                      height: "200px",
                     }}
                   >
                     <div
                       className="haiku-content"
                       style={{ whiteSpace: "pre-line" }}
                     >
-                      {haiku.content}
+                      {haiku.content
+                        .replace(/[\d.]+/g, "")
+                        .replace(/、/g, "\r\n")
+                        .replace(/ /g, "\r\n")
+                        .replace(/\s+/g, "\r\n")
+                        .trim()}
                     </div>
                   </div>
                 }
@@ -165,6 +188,31 @@ function MainPage() {
             );
           })
         )}
+      </div>
+      <div id="pagination-container">
+        <Pagination
+          current={currentPage}
+          onChange={onPageChange}
+          total={totalPages * pageSize}
+          pageSize={pageSize}
+          itemRender={(current, type, originalElement) => {
+            if (type === "page") {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 32,
+                  }}
+                >
+                  {originalElement}
+                </div>
+              );
+            }
+            return originalElement;
+          }}
+        />
       </div>
     </div>
   );
