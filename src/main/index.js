@@ -7,7 +7,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import axios from "axios";
 import { SmileOutlined } from "@ant-design/icons";
 
-
 const { Meta } = Card;
 
 dayjs.extend(relativeTime);
@@ -17,24 +16,21 @@ function MainPage() {
   const [form] = Form.useForm();
   const [totalPages, setTotalPages] = React.useState(1);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [pageSize, setPageSize] = React.useState(9); 
-
+  const [pageSize, setPageSize] = React.useState(9);
 
   useEffect(
     function () {
       let params = {
         page: currentPage,
-        limit: 9,
+        limit: pageSize,
       };
-
       axios
-        .get(`${API_URL}/haikus`,{params})
+        .get(`${API_URL}/haikus`, { params })
         .then(function (result) {
           const haikus = result.data.haikus;
           const totalPages = result.data.totalPages;
           setHaikus(haikus);
           setTotalPages(totalPages);
-          console.log("haikus:", haikus);
         })
         .catch(function (err) {
           console.error("error:", err);
@@ -92,18 +88,18 @@ function MainPage() {
         color2: color2,
       })
       .then((result) => {
-        console.log("정상적으로 정보가 전송되었습니다:", result.data);
+        console.log("情報が送信されました:", result.data);
+        setCurrentPage(1);
+        form.resetFields();
         axios
           .get(`${API_URL}/haikus`)
           .then((result) => {
-            const haikus = result.data.haikus;
-            setHaikus(haikus);
-            console.log("haikus:", haikus);
+            setHaikus(result.data.haikus);
+            setTotalPages(result.data.totalPages);
           })
           .catch((err) => {
             console.error("error:", err);
           });
-        form.resetFields();
       })
       .catch((err) => {
         console.error(err);
@@ -113,7 +109,7 @@ function MainPage() {
 
   return (
     <div>
-      <div id="haiku-info">
+      <div className="haiku-info">
         <span className="main-text">
           chatGPTと俳句を作成してみよう
           <SmileOutlined style={{ fontSize: "24px", marginLeft: "8px" }} />
@@ -146,7 +142,7 @@ function MainPage() {
             </Form.Item>
           </div>
           <Form.Item>
-            <Button id="haiku-button" size="large" htmlType="submit">
+            <Button className="haiku-button" size="large" htmlType="submit">
               俳句作り
             </Button>
           </Form.Item>
@@ -154,7 +150,7 @@ function MainPage() {
       </div>
       <h2>俳句のLIST</h2>
 
-      <div id="haikus-list">
+      <div className="haikus-list">
         {haikus.length === 0 ? (
           <div>
             <span>俳句がありません。</span>
@@ -190,22 +186,24 @@ function MainPage() {
                 }
               >
                 <Meta title={haiku.author} description={haiku.words} />
-                <span style={{
-      position: "absolute",
-      bottom: 0,
-      right: "0",
-      transform: "translateX(0%)",
-      opacity: 0.3,
-      margin: "20px",
-    }}>
-  {dayjs(haiku.createdAt).fromNow()}
-</span>
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    right: "0",
+                    transform: "translateX(0%)",
+                    opacity: 0.3,
+                    margin: "20px",
+                  }}
+                >
+                  {dayjs(haiku.createdAt).fromNow()}
+                </span>
               </Card>
             );
           })
         )}
       </div>
-      <div id="pagination-container">
+      <div className="pagination-container">
         <Pagination
           current={currentPage}
           onChange={onPageChange}

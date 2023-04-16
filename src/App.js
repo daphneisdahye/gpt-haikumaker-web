@@ -1,5 +1,6 @@
 import "./App.css";
 import MainPageComponent from "./main";
+import AdminPageComponent from "./admin";
 import { Switch, Route } from "react-router-dom";
 import { HeartOutlined } from "@ant-design/icons";
 
@@ -14,15 +15,18 @@ function App() {
       </div>
       <div id="body">
         <Switch>
-          <Route path={"/"}>
+          <Route path={"/"} exact>
             <MainPageComponent />
+          </Route>
+          <Route path={"/admin"}>
+            <AdminPageComponent />
           </Route>
         </Switch>
       </div>
       <div id="footer">
         <p>Copyright © 2023 Dahye</p>
         <p>
-          <a href="#">About</a> -<a href="#">Privacy Policy</a> -
+          <a href="#">Admin</a> -<a href="#">Privacy Policy</a> -
           <a href="#">Contact Us</a>
         </p>
       </div>

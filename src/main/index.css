@@ -21,7 +21,7 @@ button {
 }
 
 
-#haiku-info {
+.haiku-info {
     height: 400px;
     display: flex;
     justify-content: center;
@@ -34,7 +34,7 @@ button {
 }
 
 
-#haikus-list {
+.haikus-list {
     margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
@@ -69,7 +69,7 @@ button {
     width: 220px;
 }
 
-#haiku-button {
+.haiku-button {
     margin-top: 20px;
     display: block;
     margin-left: auto;
@@ -84,7 +84,7 @@ button {
     line-height: 2.3;
   }
 
-  #pagination-container {
+  .pagination-container {
     display: flex;
     justify-content: center;
     margin-top: 50px;
