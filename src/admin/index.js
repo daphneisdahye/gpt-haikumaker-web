@@ -154,7 +154,7 @@ function AdminPage() {
           <div style={{ marginTop: "16px", marginBottom: "16px" }}>            
             <span>ログアウトしてメインページに移動する</span>        
             <div className="logout-button">
-              <Button onClick={handleGoToMain}>Go to Main</Button>
+              <Button onClick={handleGoToMain}>Logout</Button>
             </div>
           </div>
         )}
