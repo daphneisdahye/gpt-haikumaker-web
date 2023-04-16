@@ -26,8 +26,7 @@ function App() {
       <div id="footer">
         <p>Copyright © 2023 Dahye</p>
         <p>
-          <a href="#">Admin</a> -<a href="#">Privacy Policy</a> -
-          <a href="#">Contact Us</a>
+          <a href="/admin">Go to admin page</a> 
         </p>
       </div>
     </div>

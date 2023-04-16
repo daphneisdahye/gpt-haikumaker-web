@@ -7,6 +7,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import axios from "axios";
 import { SmileOutlined, CloseSquareOutlined } from "@ant-design/icons";
 
+
 const { Meta } = Card;
 
 dayjs.extend(relativeTime);
@@ -19,6 +20,7 @@ function AdminPage() {
   const [pageSize, setPageSize] = React.useState(9);
   const [passwordCorrect, setPasswordCorrect] = React.useState(false);
   const [displayMessage, setDisplayMessage] = React.useState(false);
+
 
   useEffect(() => {
     if (passwordCorrect) {
@@ -46,6 +48,13 @@ function AdminPage() {
     setCurrentPage(page);
   };
 
+  useEffect(() => {
+    const storedPwdCorrect = localStorage.getItem("passwordCorrect") === "true";
+    setPasswordCorrect(storedPwdCorrect);
+    setDisplayMessage(storedPwdCorrect); 
+  }, []);
+
+
   const onSubmit_pwd = (values) => {
     axios
       .post(`${API_URL}/admin`, {
@@ -55,6 +64,7 @@ function AdminPage() {
         console.log("情報が送信されました。:", result.data);
         const password_check = result.data.password_check;
         if (password_check === true) {
+          localStorage.setItem("passwordCorrect", "true");
           setPasswordCorrect(true);
           setDisplayMessage(true);
         } else {
@@ -67,6 +77,13 @@ function AdminPage() {
       });
 
     form.resetFields();
+  };
+
+  const handleGoToMain = () => {
+    localStorage.clear();
+    setPasswordCorrect(false);
+    setDisplayMessage(false);
+    window.location.href = "/";
   };
 
   const handleDelete = (haikuId) => {
@@ -134,8 +151,11 @@ function AdminPage() {
         )}
 
         {displayMessage && (
-          <div style={{ marginTop: "16px", marginBottom: "16px" }}>
-            <span>リロードキーボードを押すと自動ログアウト</span>
+          <div style={{ marginTop: "16px", marginBottom: "16px" }}>            
+            <span>ログアウトしてメインページに移動する</span>        
+            <div className="logout-button">
+              <Button onClick={handleGoToMain}>Go to Main</Button>
+            </div>
           </div>
         )}
       </div>
