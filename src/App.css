@@ -19,7 +19,10 @@ html, body, #root, #root > div {
   margin: 0 auto; 
   display: flex;
   align-items: center; /* 수직 가운데 정렬 */    
+  cursor: pointer;
 }
+
+
 
 #header-area span {
   font-size: 36px; /* 텍스트 크기를 36px로 설정 */

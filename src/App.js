@@ -5,10 +5,13 @@ import { Switch, Route } from "react-router-dom";
 import { HeartOutlined } from "@ant-design/icons";
 
 function App() {
+  const handleClick = () => {
+    window.location.href = "/";
+  };
   return (
     <div>
       <div id="header">
-        <div id="header-area">
+        <div id="header-area" onClick={handleClick}>
           <HeartOutlined style={{ marginRight: "8px" }} />
           <span>Haiku Maker</span>
         </div>
