@@ -111,7 +111,7 @@ function MainPage() {
     <div>
       <div className="haiku-info">
         <span className="main-text">
-          chatGPTと俳句を作成してみよう
+          chatGPTと俳句を作ってみよう
           <SmileOutlined style={{ fontSize: "24px", marginLeft: "8px" }} />
         </span>
         <span className="sub-text">1~3つの単語を入力してください</span>
