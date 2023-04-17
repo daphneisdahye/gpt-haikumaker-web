@@ -128,7 +128,7 @@ function MainPage() {
             </Form.Item>
             <Form.Item
               className="form-item"
-              label={<div className="haiku-label">言葉:</div>}
+              label={<div className="haiku-label">言葉</div>}
               name="words"
               rules={[
                 { required: true, message: "1~3つの単語入力してください。" },
