@@ -120,7 +120,7 @@ function MainPage() {
           <div className="form-container">
             <Form.Item
               className="form-item"
-              label={<div className="haiku-label">登録者名:</div>}
+              label={<div className="haiku-label">登録者名</div>}
               name="author"
               rules={[{ required: true, message: "名前を入力してください。" }]}
             >
