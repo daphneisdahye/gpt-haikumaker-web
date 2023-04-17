@@ -135,7 +135,7 @@ function AdminPage() {
             <div className="form-container">
               <Form.Item
                 className="form-item"
-                label={<div className="haiku-label">PASSWORD:</div>}
+                label={<div className="haiku-label">PASSWORD</div>}
                 name="password"
                 rules={[{ required: true }]}
               >
